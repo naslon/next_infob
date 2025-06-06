@@ -32,7 +32,7 @@ export default function Cadnoticia() {
         <option value="3">Entretenimento</option>
       </Form.Select>
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Button variant="sucess" type="submit">
         Enviar
       </Button>
           </Form>
