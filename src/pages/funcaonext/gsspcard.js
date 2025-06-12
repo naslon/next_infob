@@ -1,5 +1,6 @@
-import { Container, Card, Row, Col } from "react-bootstrap"
+import { Container, Row } from "react-bootstrap"
 import { noticias } from "../api/noticias/noticias"
+import Cards from "../components/cards"
 
 export async function getServerSideProps() {
     // Fetch data from external API
@@ -15,18 +16,11 @@ export default function Gsspcard({ repo }) {
             <Row xs={1} md={3} className="g-4">
                 {Array.isArray(noticias) ?
                     noticias.map(noticia => (
-                        <Col key={noticia.idnoticia}>
-                            <Card className="text-center">
-                                <Card.Header>{noticia.titulonoticia}</Card.Header>
-                                <Card.Body>
-                                    <Card.Title>{noticia.tiponoticia}</Card.Title>
-                                    <Card.Text>
-                                        {noticia.conteudonoticia}
-                                    </Card.Text>
-                                </Card.Body>
-                                <Card.Footer className="text-muted">{noticia.datahoracadastro}</Card.Footer>
-                            </Card>
-                        </Col>
+                        <Cards idnoticia = {noticia.idnoticia}
+                        conteudonoticia = {noticia.conteudonoticia}
+                        titulonoticia = {noticia.titulonoticia}
+                        datahoracadastro = {noticia.datahoracadastro}
+                        tiponoticia = {noticia.tiponoticia}/>
                     ))
                     : "não"}
             </Row>
