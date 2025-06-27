@@ -1,9 +1,9 @@
 import { noticias } from "./noticias"
-
 export default function handler(req, res) {
-    console.log(req.query.id)
-    const encontrado = noticias.find((noticia)
-    noticias.idnoticia.toString )   
-        noticias.idnoticia.toString
-    res.status(200).json(req.query.id)
+  const encontrado = noticias.find((noticia) =>
+    noticia.idnoticia.toString() === req.query.id);
+  if (!encontrado) {
+    return res.status(404).json({ error: "Notícia não encontrada" });
+  }
+  res.status(200).json(encontrado)
 }
