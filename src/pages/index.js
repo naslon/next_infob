@@ -10,6 +10,7 @@ export async function getServerSideProps() {
 export default function Home({ noticias }) {
   return <>
     <Container>
+      <h1>2 pelos pubianos</h1>
       <Row xs={1} md={3}>
         {Array.isArray(noticias) ?
           noticias.map(noticia => (
