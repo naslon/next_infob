@@ -1,15 +1,27 @@
+import { Container, Row } from "react-bootstrap";
+import Cards from "./components/cards";
 export async function getServerSideProps() {
-  try {
-    const res = await fetch('https://felipetestefw.vercel.app/noticias');
-    const text = await res.text(); // ← pega tudo como texto
+  // Fetch data from  API notícias
+  const res = await fetch('https://felipetestefw.vercel.app/noticias')
+  const repo = await res.json()
+  // Pass data to the page via props
+  return { props: { noticias: repo } }
+}
+export default function Home({ noticias }) {
+  return <>
+    <Container>
+      <Row xs={1} md={3}>
     
-    console.log("API RAW:", text);
-
-    const repo = JSON.parse(text);
-
-    return { props: { noticias: repo } };
-  } catch (err) {
-    console.error("ERRO NO SSR:", err);
-    return { props: { noticias: [] } };
-  }
+        {Array.isArray(noticias) ?
+          noticias.map(noticia => (
+            <Cards idnoticia={noticia._id}
+              conteudonoticia={noticia.conteudonoticia}
+              titulonoticia={noticia.titulonoticia}
+              datahoracadastro={noticia.datahoracadastro}
+              tiponoticia={noticia.tiponoticia} />
+          ))
+          : "não"}
+      </Row>
+    </Container>
+  </>
 }
